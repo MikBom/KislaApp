@@ -1,12 +1,12 @@
 // Navigate Between Screens using React Navigation in React Native //
 // https://aboutreact.com/react-native-stack-navigation //
 import * as React from 'react';
-import { Button, View, Text, SafeAreaView } from 'react-native';
+import {Button, View, Text, SafeAreaView} from 'react-native';
 
-const kortti = ({ route, navigation }) => {
+const kortti = ({route, navigation}) => {
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <View style={{ flex: 1, padding: 16 }}>
+    <SafeAreaView style={{flex: 1}}>
+      <View style={{flex: 1, padding: 16}}>
         <View
           style={{
             flex: 1,
@@ -17,19 +17,15 @@ const kortti = ({ route, navigation }) => {
             style={{
               fontSize: 25,
               textAlign: 'center',
-              marginBottom: 16
+              marginBottom: 16,
             }}>
             This is Third Page of the App
             {'\n'}
             {route.params.someParam}
           </Text>
-          { route.params.someParam != 'reset' ?
-            <Button
-              title="Go back"
-              onPress={() => navigation.goBack()}
-            />
-            :null
-          }
+          {route.params.someParam != 'reset' ? (
+            <Button title="Go back" onPress={() => navigation.goBack()} />
+          ) : null}
           <Button
             onPress={() => navigation.navigate('kirjautuminen')}
             title="Go to Second Page"
@@ -42,7 +38,7 @@ const kortti = ({ route, navigation }) => {
                 routes: [
                   {
                     name: 'hakemisto',
-                    params: { someParam: 'reset' },
+                    params: {someParam: 'reset'},
                   },
                 ],
               })
@@ -53,7 +49,7 @@ const kortti = ({ route, navigation }) => {
           style={{
             fontSize: 18,
             textAlign: 'center',
-            color: 'grey'
+            color: 'grey',
           }}>
           Navigate Between Screens using{'\n'}React Navigation
         </Text>
@@ -61,13 +57,13 @@ const kortti = ({ route, navigation }) => {
           style={{
             fontSize: 16,
             textAlign: 'center',
-            color: 'grey'
+            color: 'grey',
           }}>
           www.aboutreact.com
         </Text>
       </View>
     </SafeAreaView>
   );
-}
+};
 
 export default kortti;

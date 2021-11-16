@@ -1,99 +1,107 @@
-// Navigate Between Screens using React Navigation in React Native //
-// https://aboutreact.com/react-native-stack-navigation //
-import 'react-native-gesture-handler';
-
-import * as React from 'react';
-import {Button, View, Text} from 'react-native';
+import React from 'react';
+import {View, Text, StyleSheet} from 'react-native';
+import Etusivu from './components/etusivu';
+import Kortti from './components/kortti';
+import Other from './components/other';
+import Linkit from './components/linkit';
+import colors from './assets/colors/colors';
+import Entypo from 'react-native-vector-icons/Entypo';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import Icon from 'react-native-vector-icons/FontAwesome';
+Entypo.loadFont();
+MaterialCommunityIcons.loadFont();
 
-import FirstPage from './pages/hakemisto';
-import SecondPage from './pages/kirjautuminen';
-import ThirdPage from './pages/kortti';
-import kirjaudu from './pages/kirjaudu';
-import rekisteroidy from './pages/rekisteroidy';
-import kirjautuminen from './pages/kirjautuminen';
-
+{/* tehdään navi sivuilla liikkumiseen ja alapalkki */}
 const Stack = createStackNavigator();
+const Tab = createBottomTabNavigator();
 
-function App() {
+{/* Alapalkkinavin määrittely */}
+const TabNavigator = () => {
+  return (
+    <Tab.Navigator
+      screenOptions={{
+        "tabBarActiveTintColor": "#F35D38",
+        "tabBarInactiveTintColor": "#D1D3D2",
+        "tabBarInactiveBackgroundColor": "#000000",
+        "tabBarShowLabel": false,
+        "tabBarStyle": [
+          {
+            "display": "flex"
+          },
+          null
+        ]
+      }}>
+      <Tab.Screen
+        name="Etusivu"
+        component={Etusivu}
+        options={{
+          tabBarIcon: ({color}) => (
+            <Entypo name="home" size={32} color={color} />
+          ),
+        }}
+      />
+       <Tab.Screen
+        name="Linkit"
+        component={Linkit}
+        options={{
+          tabBarIcon: ({color}) => (
+            <Entypo name="heart" size={32} color={color} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Kortti"
+        component={Kortti}
+        options={{
+          tabBarIcon: ({color}) => (
+            <Entypo name="v-card" size={32} color={color} />
+          ),
+        }}
+      
+      />
+
+      {/* Tää on testisivuna enemmänki tietokannan kanssa säätämiselle ja tullaan poistamaan lopuksi */}
+      <Tab.Screen
+        name="Other"
+        component={Other}
+        options={{
+          tabBarIcon: ({color}) => (
+            <Entypo name="credit-card" size={32} color={color} />
+          ),
+        }}
+      
+      />
+    </Tab.Navigator>
+  );
+};
+
+{/* Apin perustoiminta */}
+const App = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="hakemisto">
+      <Stack.Navigator>
         <Stack.Screen
-          name="hakemisto"
-          component={FirstPage}
-          options={{
-            title: 'Hakemisto', //Set Header Title
-            headerStyle: {
-              backgroundColor: '#f4511e', //Set Header color
-            },
-            headerTintColor: '#fff', //Set Header text color
-            headerTitleStyle: {
-              fontWeight: 'bold', //Set Header text style
-            },
-          }}
-        />
-        <Stack.Screen
-          name="kirjautuminen"
-          component={kirjautuminen}
-          options={{
-            title: 'Valikko', //Set Header Title
-            headerStyle: {
-              backgroundColor: '#f4511e', //Set Header color
-            },
-            headerTintColor: '#fff', //Set Header text color
-            headerTitleStyle: {
-              fontWeight: 'bold', //Set Header text style
-            },
-          }}
-        />
-        <Stack.Screen
-          name="kirjaudu"
-          component={kirjaudu}
-          options={{
-            title: 'Kirjautuminen', //Set Header Title
-            headerStyle: {
-              backgroundColor: '#f4511e', //Set Header color
-            },
-            headerTintColor: '#fff', //Set Header text color
-            headerTitleStyle: {
-              fontWeight: 'bold', //Set Header text style
-            },
-          }}
-        />
-        <Stack.Screen
-          name="rekisteroidy"
-          component={rekisteroidy}
-          options={{
-            title: 'Rekisteröidy', //Set Header Title
-            headerStyle: {
-              backgroundColor: '#f4511e', //Set Header color
-            },
-            headerTintColor: '#fff', //Set Header text color
-            headerTitleStyle: {
-              fontWeight: 'bold', //Set Header text style
-            },
-          }}
-        />
-        <Stack.Screen
-          name="kortti"
-          component={ThirdPage}
-          options={{
-            title: 'Kortti', //Set Header Title
-            headerStyle: {
-              backgroundColor: '#f4511e', //Set Header color
-            },
-            headerTintColor: '#fff', //Set Header text color
-            headerTitleStyle: {
-              fontWeight: 'bold', //Set Header text style
-            },
-          }}
+          name="TabNavigator"
+          component={TabNavigator}
+          options={{headerShown: false}}
         />
       </Stack.Navigator>
     </NavigationContainer>
   );
-}
+};
+
+{/* Tyylit */}
+const styles = StyleSheet.create({
+  tabBar: {
+    backgroundColor: colors.black,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+  },
+});
 
 export default App;

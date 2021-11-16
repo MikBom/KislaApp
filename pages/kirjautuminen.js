@@ -1,7 +1,14 @@
 // Navigate Between Screens using React Navigation in React Native //
 // https://aboutreact.com/react-native-stack-navigation //
 import * as React from 'react';
-import {Button, View, Text, SafeAreaView, Pressable} from 'react-native';
+import {
+  Button,
+  View,
+  Text,
+  SafeAreaView,
+  Pressable,
+  Linking,
+} from 'react-native';
 
 const kirjautuminen = ({navigation}) => {
   return (
@@ -21,7 +28,7 @@ const kirjautuminen = ({navigation}) => {
             }}>
             This is Second Page of the App
           </Text>
-          <Button title="Go back" onPress={() => navigation.goBack()} />
+          <Button title="Takaisin" onPress={() => navigation.goBack()} />
           <Button
             title="Kirjaudu sisään"
             onPress={() =>
@@ -29,21 +36,17 @@ const kirjautuminen = ({navigation}) => {
             }
           />
           <Button
-            title="Rekisteröidy"
-            onPress={() =>
-              navigation.navigate('rekisteroidy', {someParam: 'Param1'})
-            }
+            title="Kotisivut"
+            onPress={() => Linking.openURL('http://www.kisla.net/')}
           />
 
           <Button
-            title="Go to First Page"
+            title="Etusivu"
             onPress={() => navigation.navigate('hakemisto')}
           />
           <Button
-            title="Go to Third Page"
-            onPress={() =>
-              navigation.navigate('ThirdPage', {someParam: 'Param1'})
-            }
+            title="Jäsenkortti"
+            onPress={() => navigation.navigate('kortti', {someParam: 'Param1'})}
           />
         </View>
         <Text

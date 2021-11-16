@@ -19,7 +19,7 @@ const hakemisto = ({navigation}) => {
               textAlign: 'center',
               marginBottom: 16,
             }}>
-            This is the First Page of the app
+            Tämä on etusivu
           </Text>
           <Button
             onPress={() => navigation.navigate('kirjautuminen')}
