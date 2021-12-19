@@ -1,5 +1,6 @@
 # KislaApp
 Mobile app
+Programmed with React-Native and log in page with PHP and database is done in MySQL.
 The first page shows news for happenings and photos.
 The second page is for links to main pages which helps to follow team.
 The third page has signing in link to sign to see if person has valid licence.
